@@ -1,5 +1,4 @@
 
-## Parallel Algorithms
+## Parallel Algorithms MIPT-2017
 
-Here you can find list of projects I implemented during MIPT parallel algorithms course in 2016:
-
+Here you can find projects that I implemented during MIPT parallel algorithms course

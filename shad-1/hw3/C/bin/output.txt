@@ -1,0 +1,26 @@
+// Setting keys
+  for(int i = 0; i < 2; ++i) {
+    Vertex *prev_vertex = heaps[i].Pop();
+    int current_layer = prev_vertex->layer;
+    prev_vertex->key = 0;
+    Heap<Vertex*, CmpWithKeys> local_heap;
+    while(!heaps[i].Empty()) {
+      local_heap.Clear();
+      while(!heaps[i].Empty() && current_layer == heaps[i].Top()->layer) {
+        Vertex *vertex = heaps[i].Pop();
+        std::sort(vertex->neighbors.begin(), vertex->neighbors.end(), [](Vertex *first, Vertex *second) {
+          return first->key < second->key;
+        });
+        local_heap.Push(vertex);
+      }
+      current_layer -= 1;
+      while(!local_heap.Empty()) {
+        Vertex *curr_vertex = local_heap.Pop();
+        if(vertex_eq(curr_vertex, prev_vertex)) {
+          curr_vertex->key = prev_vertex->key;
+        } else {
+          curr_vertex->key = prev_vertex->key + 1;
+        }
+      }
+    }
+  }
